@@ -4,11 +4,7 @@ Copyright (c) 2022 by Jeff Bass.
 License: MIT, see LICENSE for more details.
 """
 
-# import os
-# import sys
 import random
-# import logging
-# import logging.handlers
 import traceback
 import subprocess
 from time import sleep
