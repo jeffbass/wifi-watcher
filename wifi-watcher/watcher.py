@@ -137,6 +137,7 @@ class WatcherWatcher:
 class dummy_GPIO:
     """ Methods that allow software testing on computers that are not RPis
         and therefore don't have GPIO pins
+        Print statements document simulated GPIO actions.
     """
     def __init__(self):
         self.BCM = 'BCM'
