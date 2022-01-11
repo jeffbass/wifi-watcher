@@ -4,11 +4,11 @@ Copyright (c) 2022 by Jeff Bass.
 License: MIT, see LICENSE for more details.
 """
 
-import os
-import sys
+# import os
+# import sys
 import random
-import logging
-import logging.handlers
+# import logging
+# import logging.handlers
 import traceback
 import subprocess
 from time import sleep
@@ -45,10 +45,11 @@ class Watcher:
 
     Parameters:
         settings (Settings object): settings for wait times, power cycle times
+        log (Logging object): the log started in __main__ for logging events
+
     """
 
     def __init__(self, settings, log):
-        # Is this startup due to a power failure? or due to a systemd restart?
         self.log = log
         global GPIO
         self.pin = settings.pin
@@ -98,18 +99,15 @@ class Watcher:
     def ping_internet_OK(self):
         # use the linux "ping" command to get response from google.com.
         command = ["ping", "-c", "3", "google.com"]
-        timed_out = False
+        timed_out = False  # for testing
         try:
             result = subprocess.run(command, timeout=15, capture_output=True)
         except subprocess.TimeoutExpired:
-            timed_out = True
-            print("Ping to Google TIMED OUT)")
+            timed_out = True  # for testing
             return False
         if result.returncode == 0:
-            print("Pinged Google OK")
             return True
         else:
-            print("Ping to Google FAILED")
             return False
 
     def random_ping_OK(self):
