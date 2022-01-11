@@ -1,0 +1,24 @@
+# wifi-watcher service unit file
+# Defines wifi-watcher.py as a systemd service that will run every time the
+# Raspberry Pi computer starts or restarts.
+#
+# This file should be copied to /etc/systemd/system as root
+#   e.g. sudo cp wifi-watcher.service /etc/systemd/system
+# Use usual systemctl start, stop, status restart, enable commands
+#   e.g. sudo systemctl start imagenode.service
+# See the systemd, systemctl and journalctl man pages for details.
+
+[Unit]
+Description=wifi-watcher Service
+After=multi-user.target
+
+[Service]
+Type=idle
+WorkingDirectory=/home/pi/wifi-watcher/wifi-watcher
+User=pi
+Restart=always
+RestartSec=120
+ExecStart=/home/pi/.virtualenvs/wifi/bin/python -u /home/pi/wifi-watcher/wifi-watcher/wifi-watcher.py
+
+[Install]
+WantedBy=multi-user.target
